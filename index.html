@@ -114,6 +114,15 @@ hr.section-line { border: none; border-top: 1px solid var(--border); margin: 0; 
 .project-card.featured .project-info { flex: 1.1; }
 .project-card.featured .project-code-preview { flex: 0.9; }
 .project-card[data-hidden="true"] { display: none; }
+.project-card.wip { border-style: dashed; border-color: var(--border); opacity: 0.88; }
+.project-card.wip:hover { border-color: var(--text-tertiary); opacity: 1; }
+.wip-badge {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 10px; border: 1px solid var(--text-tertiary);
+  color: var(--text-tertiary); display: inline-flex; align-items: center; gap: 4px;
+}
+.wip-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); animation: wip-pulse 1.8s ease-in-out infinite; }
+@keyframes wip-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 .project-header { display: flex; align-items: center; gap: 10px; }
 .project-icon {
   width: 34px; height: 34px; background: var(--blue-glow); border: 1px solid var(--blue-dim);
@@ -216,7 +225,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
       <span class="badge">TikTok API</span>
     </div>
     <div class="hero-cta">
-      <!-- <a href="#contact" class="btn btn-primary">Get in touch</a> -->
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
       <a href="#projects" class="btn btn-ghost">View projects →</a>
     </div>
   </div>
@@ -254,15 +263,15 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 <div id="stats">
   <div class="stats-grid">
     <div class="stat-item">
-      <span class="stat-number">10</span>
+      <span class="stat-number">12</span>
       <span class="stat-label">deployed projects</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">80+</span>
+      <span class="stat-number">90+</span>
       <span class="stat-label">slash commands</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">15+</span>
+      <span class="stat-number">18+</span>
       <span class="stat-label">external APIs</span>
     </div>
     <div class="stat-item">
@@ -282,13 +291,14 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 <section id="projects">
   <div class="section-label">// projects</div>
   <h2 class="section-title">What I've shipped</h2>
-  <p class="section-subtitle">Ten production deployments across Discord bots, REST APIs, and web applications — each built to a specific problem, not a template.</p>
+  <p class="section-subtitle">Eleven shipped projects and one in active development, spanning Discord bots, REST APIs, and web applications — each built to a specific problem, not a template.</p>
 
   <div class="filter-tabs">
     <button class="filter-tab active" data-filter="all">All</button>
     <button class="filter-tab" data-filter="bot">Discord Bots</button>
     <button class="filter-tab" data-filter="web">Web / API</button>
     <button class="filter-tab" data-filter="rss">Data Pipelines</button>
+    <button class="filter-tab" data-filter="wip">In Progress</button>
   </div>
 
   <div class="projects-grid">
@@ -349,6 +359,41 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
         <span class="tag blue-tag">JSON API</span>
         <span class="tag">web scraping</span>
         <span class="tag">data pipeline</span>
+      </div>
+    </div>
+
+    <!-- TOURNAMENT TRACKER -->
+    <div class="project-card" data-category="web">
+      <div class="project-header">
+        <div class="project-icon orange-icon">🥋</div>
+        <span class="project-name">Tournament Tracker</span>
+        <span class="project-type-pill web">Flask Web App</span>
+      </div>
+      <p class="project-desc">Multi-page Flask application for tracking martial arts tournament results and rankings. Separate pages for data entry, admin review, public results, and rankings; REST endpoints for schools, divisions, belt ranks, and events; a recalculation endpoint that recomputes total points and re-ranks competitors across the full dataset on demand.</p>
+      <div class="project-tags">
+        <span class="tag orange-tag">Flask</span>
+        <span class="tag orange-tag">multi-page app</span>
+        <span class="tag green-tag">PostgreSQL</span>
+        <span class="tag blue-tag">ranking engine</span>
+        <span class="tag">admin tooling</span>
+      </div>
+    </div>
+
+    <!-- WEATHER ALERTS -->
+    <div class="project-card" data-category="bot">
+      <div class="project-header">
+        <div class="project-icon green-icon">🌪️</div>
+        <span class="project-name">Weather Alert Bot</span>
+        <span class="project-type-pill bot">Discord Bot</span>
+      </div>
+      <p class="project-desc">National Weather Service integration with a personal alert subscription system. Users subscribe to any NWS zone (lookup by state with full autocomplete) and receive severity-color-coded DM embeds — urgency, expiration, recommended actions, and a link to the official alert — pushed by a 5-minute polling loop that deduplicates by alert ID so no one gets the same warning twice.</p>
+      <div class="project-tags">
+        <span class="tag blue-tag">NWS API</span>
+        <span class="tag green-tag">zone lookup</span>
+        <span class="tag purple-tag">DM subscriptions</span>
+        <span class="tag purple-tag">tasks.loop polling</span>
+        <span class="tag">dedup by alert ID</span>
+        <span class="tag">autocomplete</span>
       </div>
     </div>
 
@@ -489,6 +534,22 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
       </div>
     </div>
 
+    <!-- CODE SCANNER (WIP) -->
+    <div class="project-card wip" data-category="wip">
+      <div class="project-header">
+        <div class="project-icon">🔍</div>
+        <span class="project-name">Code Security Scanner</span>
+        <span class="wip-badge">In Progress</span>
+      </div>
+      <p class="project-desc">A FastAPI service for automated repository security scanning, currently in early development. The API scaffolding and result-ingestion endpoints are in place; the scan engine itself (network/port scanning groundwork already started separately) is the next piece being built out. Posted here as a work-in-progress, not a finished deliverable.</p>
+      <div class="project-tags">
+        <span class="tag">FastAPI</span>
+        <span class="tag">early stage</span>
+        <span class="tag">repo scanning</span>
+        <span class="tag">findings export</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -558,13 +619,13 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     </div>
     <div class="cap-card">
       <span class="cap-icon">📡</span>
-      <div class="cap-title">Monitoring &amp; reliability</div>
-      <p class="cap-desc">Custom UniversalMonitor system: webhook error reporting, heartbeats, rate limit detection, restart flags, and guild audit logging — built into every project.</p>
+      <div class="cap-title">Shared monitoring infrastructure</div>
+      <p class="cap-desc">Every bot in this portfolio runs on the same self-built <code style="font-family:var(--mono);background:var(--surface-2);padding:1px 5px;border-radius:3px;font-size:11px;">UniversalMonitor</code> class — one piece of infrastructure, reused everywhere instead of rebuilt per-project. It tracks requests-per-minute, memory and CPU via psutil, latency, and command counts, then pushes structured embeds to a Discord webhook for errors, warnings, restarts, and unauthorized guild joins.</p>
       <div class="cap-features">
-        <span class="cap-feat">Webhook error + warn reports</span>
-        <span class="cap-feat">Heartbeat loop</span>
-        <span class="cap-feat">Rate limit threshold alerts</span>
-        <span class="cap-feat">Restart detection + reporting</span>
+        <span class="cap-feat">One monitor class, all bots</span>
+        <span class="cap-feat">RPM tracking + rate alerts</span>
+        <span class="cap-feat">Heartbeat every 2 hours</span>
+        <span class="cap-feat">Restart + guild-leave reporting</span>
       </div>
     </div>
   </div>
@@ -582,6 +643,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     <div class="tech-item"><div class="tech-dot" style="background:#3572A5"></div><span class="tech-name">Python 3.11+</span><span class="tech-sub">core language</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#5865F2"></div><span class="tech-name">disnake</span><span class="tech-sub">discord wrapper</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#F0883E"></div><span class="tech-name">Flask</span><span class="tech-sub">web framework</span></div>
+    <div class="tech-item"><div class="tech-dot" style="background:#009688"></div><span class="tech-name">FastAPI</span><span class="tech-sub">web framework</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#58A6FF"></div><span class="tech-name">asyncio</span><span class="tech-sub">concurrency</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#9B7DBB"></div><span class="tech-name">aiohttp</span><span class="tech-sub">async http</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#336791"></div><span class="tech-name">PostgreSQL</span><span class="tech-sub">database</span></div>
@@ -593,6 +655,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     <div class="tech-item"><div class="tech-dot" style="background:#A371F7"></div><span class="tech-name">RobloxWatcher</span><span class="tech-sub">safety db</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#E8162E"></div><span class="tech-name">CISA / SANS</span><span class="tech-sub">threat feeds</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#1565D8"></div><span class="tech-name">HaveIBeenPwned</span><span class="tech-sub">breach data</span></div>
+    <div class="tech-item"><div class="tech-dot" style="background:#0078D4"></div><span class="tech-name">NWS API</span><span class="tech-sub">weather alerts</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#F78166"></div><span class="tech-name">Webhooks</span><span class="tech-sub">monitoring</span></div>
     <div class="tech-item"><div class="tech-dot" style="background:#8B949E"></div><span class="tech-name">Linux / VPS</span><span class="tech-sub">hosting</span></div>
   </div>
@@ -601,9 +664,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 <hr class="section-line">
 
 <!-- CONTACT -->
-
-  <!-- Uncomment later -->
-<!-- <section id="contact">
+<section id="contact">
   <div class="section-label">// contact</div>
   <h2 class="section-title">Let's work together</h2>
   <p class="section-subtitle">Have a bot to build, a workflow to automate, or a feature to add to an existing project? I'm available for commissions and ongoing work.</p>
@@ -630,7 +691,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
       </div>
     </a>
   </div>
-</section> -->
+</section>
 
 <footer>
   <p>bat_nation0224 · python · flask · disnake · open to commissions</p>
