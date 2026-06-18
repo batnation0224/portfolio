@@ -386,14 +386,14 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
         <span class="project-name">Weather Alert Bot</span>
         <span class="project-type-pill bot">Discord Bot</span>
       </div>
-      <p class="project-desc">National Weather Service integration with a personal alert subscription system. Users subscribe to any NWS zone (lookup by state with full autocomplete) and receive severity-color-coded DM embeds — urgency, expiration, recommended actions, and a link to the official alert — pushed by a 5-minute polling loop that deduplicates by alert ID so no one gets the same warning twice.</p>
+      <p class="project-desc">National Weather Service integration with a full subscription lifecycle. Users browse deduplicated zones through a paginated button view, subscribe via autocomplete, list active subscriptions, and remove them individually — all backed by autocomplete that's scoped to each user's own zones. A 5-minute polling loop pushes severity-color-coded DM embeds for new alerts only, tracked by alert ID so nothing repeats.</p>
       <div class="project-tags">
         <span class="tag blue-tag">NWS API</span>
-        <span class="tag green-tag">zone lookup</span>
-        <span class="tag purple-tag">DM subscriptions</span>
+        <span class="tag green-tag">paginated views</span>
+        <span class="tag purple-tag">subscription CRUD</span>
         <span class="tag purple-tag">tasks.loop polling</span>
+        <span class="tag">scoped autocomplete</span>
         <span class="tag">dedup by alert ID</span>
-        <span class="tag">autocomplete</span>
       </div>
     </div>
 
